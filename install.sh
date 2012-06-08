@@ -7,7 +7,7 @@ GET_TO_IT=0
 GOT_RABBIT=0
 
 TMP_DIR=$HOME/.bridge
-BIN_DIR=${TMP_DIR}/bridge/bc-latest/bin
+BIN_DIR=${TMP_DIR}/bridge-server/bc-latest/bin
 
 err() {
     echo "$@" 1>&2
@@ -44,7 +44,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
 	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}${ARCH}.tar.gz"
 	
 	tar -xzf tmp/rabbitmq.tar.gz
-	mv getbridge-rabbit* rabbitmq
+	mv rabbitmq-server* rabbitmq
     else
 	err "Very well, then. I will respect your decision."
     fi
@@ -78,4 +78,4 @@ fi
 
 echo -e "\n Then start the bridge server:\n  Execute \`${BIN_DIR}/server start\`"
 
-echo -e "\n To stop the bridge server, simply run \`${BIN_DIR}/bridge/bc-latest/bin/server stop\`"
+echo -e "\n To stop the bridge server, simply run \`${BIN_DIR}/server stop\`"
