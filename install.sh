@@ -33,7 +33,7 @@ if [ ! -d "$TMP_DIR" ]; then
 fi
 
 if [ ! -d "${TMP_DIR}/tmp" ]; then
-    mkdir $TMP_DIR/tmp
+    mkdir -p $TMP_DIR/tmp
 fi
 cd $TMP_DIR/tmp
 
