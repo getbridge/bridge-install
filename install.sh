@@ -41,7 +41,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
 	RABBIT_DIR="${TMP_DIR}/tmp/rabbitmq"
 	GOT_RABBIT=1
-	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}/${ARCH}.tar.gz"
+	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}${ARCH}.tar.gz"
 	
 	tar -xzf tmp/rabbitmq.tar.gz
 	mv getbridge-rabbit* rabbitmq
