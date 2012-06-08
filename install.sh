@@ -21,13 +21,13 @@ elif [ $ARCH != "x86_64" ]; then
 fi
 
 prompt() {
-    if [[ $GET_TO_IT = "1" ]]; then
+    if [ $GET_TO_IT = "1" ]; then
 	return 1
     fi
 
     read -r -p "$1 [Y/n] " response
     response=${response,,}
-    [ ! [[ $response =~ ^(n|no)$ ]] ]
+    [[ $response =~ ^(y|yes)$ ]]
 }
 
 echo "Setting up in $TMP_DIR."
