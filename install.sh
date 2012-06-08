@@ -38,7 +38,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
 	RABBIT_DIR="${TMP_DIR}/rabbitmq"
 	GOT_RABBIT=1
-	curl -L -o tmp/rabbitmq.tar.gz "${RABBIT_URL}/${ARCH}.tar.gz"
+	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}/${ARCH}.tar.gz"
 	
 	tar -xzf tmp/rabbitmq.tar.gz
 	mv getbridge-rabbit* rabbitmq
@@ -52,7 +52,7 @@ if [ -d $TMP_DIR/bridge-server ]; then
 fi
 
 echo "Downloading and unpacking Bridge from ${BRIDGE_URL}/${ARCH}."
-curl -L -o tmp/bridge.tar.gz "${BRIDGE_URL}/${ARCH}"
+wget -O tmp/bridge.tar.gz "${BRIDGE_URL}/${ARCH}"
 
 tar -xzf tmp/bridge.tar.gz
 if [ $? != "0" ]; then
