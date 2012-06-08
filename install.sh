@@ -10,7 +10,7 @@ TMP_DIR=$HOME/.bridge
 BIN_DIR=${TMP_DIR}/bridge/bc-latest/bin
 
 err() {
-    echo "$@" > 2&
+    echo "$@" > &2
     exit 1
 }
 
@@ -31,14 +31,15 @@ prompt() {
 }
 
 echo "Setting up in $TMP_DIR."
+
 mkdir -p $TMP_DIR/tmp
 
-echo "By the way, you're in $PWD."
+cd $TMP_DIR
 
 if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     # Acquire rabbit.
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
-	RABBIT_DIR="${TMP_DIR}/rabbitmq"
+	RABBIT_DIR="${TMP_DIR}/tmp/rabbitmq"
 	GOT_RABBIT=1
 	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}/${ARCH}.tar.gz"
 	
@@ -58,7 +59,6 @@ wget -O tmp/bridge.tar.gz "${BRIDGE_URL}/${ARCH}"
 
 tar -xzf tmp/bridge.tar.gz
 if [ $? != "0" ]; then
-    echo "Tar returned with $?"
     err "tar failed!"
 fi
 
