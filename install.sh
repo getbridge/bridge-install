@@ -15,10 +15,6 @@ elif [ $ARCH != "x86_64" ]; then
 fi
 
 prompt() {
-    if [[ $GET_TO_IT = "1" ]]; then
-	return 1
-    fi
-
     read -r -p "$1 [y/N] " response
     response=${response,,}
     [[ $response =~ ^(yes|y)$ ]]
