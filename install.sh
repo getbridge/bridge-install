@@ -33,6 +33,8 @@ prompt() {
 echo "Setting up in $TMP_DIR."
 mkdir -p $TMP_DIR/tmp
 
+echo "By the way, you're in $PWD."
+
 if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     # Acquire rabbit.
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
