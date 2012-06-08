@@ -27,20 +27,21 @@ prompt() {
 
     read -r -p "$1 [y/N] " response
     response=${response,,}
-    [[ $response =~ ^(yes|y)$ ]]
+    [ ! [[ $response =~ ^(n|no)$ ]] ]
 }
 
 echo "Setting up in $TMP_DIR."
 mkdir -p $TMP_DIR/tmp
-
-cd $TMP_DIR/tmp
 
 if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     # Acquire rabbit.
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
 	RABBIT_DIR="${TMP_DIR}/rabbitmq"
 	GOT_RABBIT=1
-	curl -L -o rabbitmq.tar.gz "${RABBIT_URL}/${ARCH}.tar.gz"; tar -xzf rabbitmq.tar.gz -o ../rabbitmq
+	curl -L -o tmp/rabbitmq.tar.gz "${RABBIT_URL}/${ARCH}.tar.gz"
+	
+	tar -xzf tmp/rabbitmq.tar.gz
+	mv getbridge-rabbit* rabbitmq
     else
 	err "Very well, then. I will respect your decision."
     fi
@@ -51,14 +52,7 @@ if [ -d $TMP_DIR/bridge-server ]; then
 fi
 
 echo "Downloading and unpacking Bridge from ${BRIDGE_URL}/${ARCH}."
-if [ ! -r "${TMP_DIR}/tmp/bridge.tar.gz" ]; then
-    curl -L -o bridge.tar.gz "${BRIDGE_URL}/${ARCH}"
-    if $?; then
-	err "curl failed!"
-    fi
-fi
-
-cd ..
+curl -L -o tmp/bridge.tar.gz "${BRIDGE_URL}/${ARCH}"
 
 tar -xzf tmp/bridge.tar.gz
 if [ $? != "0" ]; then
