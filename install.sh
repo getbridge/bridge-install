@@ -10,7 +10,7 @@ TMP_DIR=$HOME/.bridge
 BIN_DIR=${TMP_DIR}/bridge/bc-latest/bin
 
 err() {
-    echo "$@" > &2
+    echo "$@" 1>&2
     exit 1
 }
 
