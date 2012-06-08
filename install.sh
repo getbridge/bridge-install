@@ -25,7 +25,7 @@ prompt() {
 	return 1
     fi
 
-    read -r -p "$1 [y/N] " response
+    read -r -p "$1 [Y/n] " response
     response=${response,,}
     [ ! [[ $response =~ ^(n|no)$ ]] ]
 }
