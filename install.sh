@@ -3,7 +3,10 @@ ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
 RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server-2.8.1u."
 
-GET_TO_IT=0
+GET_TO_IT="0"
+case "$-" in
+    *i*) GET_TO_IT="1"
+esac
 GOT_RABBIT=0
 
 TMP_DIR=$HOME/.bridge
