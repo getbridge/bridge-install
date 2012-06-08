@@ -25,8 +25,8 @@ prompt() {
     [[ $response =~ ^(yes|y)$ ]]
 }
 
-if [ ! -x `which tar 2>&1` ]; then
-    err "You don't seem to have tar installed and/or in your path. My sincerest apologies."
+if [ ! -x `which rabbitmq-server 2>&1` ]; then
+    err "You don't seem to have tar installed and/or in your path. Why don't you come back a little later once this has been amended?"
 fi
 
 if [ ! -d "$TMP_DIR" ]; then
