@@ -7,11 +7,16 @@ GET_TO_IT=0
 GOT_RABBIT=0
 
 TMP_DIR=$HOME/.bridge
+
+err() {
+    echo $1 > 2&
+    exit 1
+}
+
 if [[ $ARCH =~ ^(x86|i[3-6]86)$ ]]; then
     $ARCH = "x86"
 elif [ $ARCH != "x86_64" ]; then
-    echo "My sincerest apologies. I do not know how to deal with your computer's architecture."
-    exit 1
+    err "My sincerest apologies. I do not know how to deal with your computer's architecture."
 fi
 
 prompt() {
@@ -20,11 +25,14 @@ prompt() {
     [[ $response =~ ^(yes|y)$ ]]
 }
 
+if [ ! -x `which rabbitmq-server 2>&1` ]; then
+    err "You don't seem to have tar installed and/or in your path. My sincerest apologies."
+
 if [ ! -d "$TMP_DIR" ]; then
     if prompt "May I set up in $TMP_DIR?"; then
 	mkdir $TMP_DIR
     else
-	echo "That is unfortunate. Where, then, may I set up?"
+	err "That is unfortunate. Where, then, may I set up?"
     fi
 fi
 
@@ -33,7 +41,7 @@ if [ ! -d "${TMP_DIR}/tmp" ]; then
 fi
 cd $TMP_DIR/tmp
 
-if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
+if [ ! -x `which rabbitmq-server 2>&1` ]; then
     # Acquire rabbit.
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
 	RABBIT_DIR="${TMP_DIR}/rabbitmq"
@@ -47,8 +55,7 @@ fi
 if prompt "Our next event involves acquiring a copy of the Bridge gateway. Is that all right?"; then
     curl -o bridge.tar.gz "${BRIDGE_URL}/${ARCH}"; tar -xzf bridge.tar.gz -o ../bridge
 else
-    echo "If you won't let me do even this for you, what was the point of asking for my assistance in the first place?"
-    exit 1;
+    err "If you won't let me do even this for you, what was the point of asking for my assistance in the first place?"
 fi
 
 cd ..
