@@ -7,6 +7,8 @@ GET_TO_IT="0"
 case "$-" in
     *i*) GET_TO_IT="1"
 esac
+
+echo "Interactive? : ${GET_TO_IT}"
 GOT_RABBIT=0
 
 TMP_DIR=$HOME/.bridge
@@ -42,7 +44,7 @@ cd $TMP_DIR
 if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     # Acquire rabbit.
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
-	RABBIT_DIR="${TMP_DIR}/tmp/rabbitmq"
+	RABBIT_DIR="${TMP_DIR}/rabbitmq"
 	GOT_RABBIT=1
 	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}${ARCH}.tar.gz"
 	
