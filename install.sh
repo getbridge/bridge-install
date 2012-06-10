@@ -6,7 +6,7 @@ RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server
 GET_TO_IT="0"
 if [ -z "${PS1}" ]; then
     GET_TO_IT="1"
-esac
+fi
 
 echo "Interactive? : ${GET_TO_IT}"
 
