@@ -79,6 +79,6 @@ else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
 
-echo -e "\n Then start the bridge server:\n  Execute \`${BIN_DIR}/server start\`"
+echo -e "\n Then start the bridge server:\n  Execute \`${BIN_DIR}/start start\`"
 
-echo -e "\n To stop the bridge server, simply run \`${BIN_DIR}/server stop\`"
+echo -e "\n To stop the bridge server, simply run \`${BIN_DIR}/start stop\`"
