@@ -1,16 +1,15 @@
+
 #!/bin/sh
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
 RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server-2.8.1u."
 
-GET_TO_IT="0"
+GET_TO_IT=""
 if [ -z "${PS1}" ]; then
     GET_TO_IT="1"
 fi
 
-echo "Interactive? : ${GET_TO_IT}"
-
-GOT_RABBIT=0
+GOT_RABBIT=""
 
 TMP_DIR=$HOME/.bridge
 BIN_DIR=${TMP_DIR}/bridge-server/bc-latest/bin
@@ -27,7 +26,7 @@ elif [ $ARCH != "x86_64" ]; then
 fi
 
 prompt() {
-    if [ $GET_TO_IT = "1" ]; then
+    if [ -n "${GET_TO_IT}" ]; then
 	return 1
     fi
 
@@ -46,7 +45,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     # Acquire rabbit.
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
 	RABBIT_DIR="${TMP_DIR}/rabbitmq"
-	GOT_RABBIT=1
+	GOT_RABBIT="1"
 	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}${ARCH}.tar.gz"
 	
 	tar -xzf tmp/rabbitmq.tar.gz
@@ -76,7 +75,7 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
-if [ $GOT_RABBIT = 1 ]; then
+if [ -n $GOT_RABBIT ]; then
     echo "  Execute \`cd ${RABBIT_DIR}; ./sbin/rabbitmq-server\`".
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
