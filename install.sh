@@ -1,4 +1,3 @@
-
 #!/bin/sh
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
@@ -7,6 +6,10 @@ RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server
 GET_TO_IT=""
 if [ -z "${PS1}" ]; then
     GET_TO_IT="1"
+fi
+
+if [ -n "$GET_TO_IT" ]; then
+    echo "asdf";
 fi
 
 GOT_RABBIT=""
@@ -27,7 +30,7 @@ fi
 
 prompt() {
     if [ -n "${GET_TO_IT}" ]; then
-	return 1
+	return 0
     fi
 
     read -r -p "$1 [Y/n] " response
