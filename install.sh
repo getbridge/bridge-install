@@ -4,11 +4,12 @@ BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
 RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server-2.8.1u."
 
 GET_TO_IT="0"
-case "$-" in
-    *i*) GET_TO_IT="1"
+if [ -z "${PS1}" ]; then
+    GET_TO_IT="1"
 esac
 
 echo "Interactive? : ${GET_TO_IT}"
+
 GOT_RABBIT=0
 
 TMP_DIR=$HOME/.bridge
