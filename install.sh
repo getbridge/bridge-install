@@ -1,4 +1,3 @@
-
 #!/bin/sh
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
@@ -19,7 +18,7 @@ err() {
     exit 1
 }
 
-if [[ $ARCH =~ ^(x86|i[3-6]86)$ ]]; then
+if [[ $ARCH =~ "^(x86|i[3-6]86)$" ]]; then
     $ARCH = "x86"
 elif [ $ARCH != "x86_64" ]; then
     err "My sincerest apologies. I do not know how to deal with your computer's architecture."
@@ -47,9 +46,11 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
 	RABBIT_DIR="${TMP_DIR}/rabbitmq"
 	GOT_RABBIT="1"
 	curl -L "${RABBIT_URL}${ARCH}.tar.gz" -o tmp/rabbitmq.tar.gz
-	
 	tar -xzf tmp/rabbitmq.tar.gz
 	mv rabbitmq-server* rabbitmq
+	curl -L https://raw.github.com/getbridge/bridge-server/ec2/rabbitmq-server -o > $TMP_DIR/rabbitmq-server
+	echo "cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
+	chmod +x $TMP_DIR/rabbitmq-server
     else
 	err "Very well, then. I will respect your decision."
     fi
@@ -76,7 +77,7 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
 if [[ $GOT_RABBIT != "" ]]; then
-    echo "  Execute \`./bridge-server/rabbitmq-server\`"
+    echo "  Execute \`./rabbitmq-server\`"
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
