@@ -1,3 +1,4 @@
+
 #!/bin/sh
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
@@ -75,8 +76,7 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
 if [[ $GOT_RABBIT != "" ]]; then
-    echo "got rabbit: '${GOT_RABBIT}'"
-    echo "  Execute \`cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server\`".
+    echo "  Execute \`./bridge-server/rabbitmq-server\`"
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
