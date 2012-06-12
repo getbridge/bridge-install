@@ -8,10 +8,6 @@ if [ -z "${PS1}" ]; then
     GET_TO_IT="1"
 fi
 
-if [ -n "$GET_TO_IT" ]; then
-    echo "asdf";
-fi
-
 GOT_RABBIT=""
 
 TMP_DIR=$HOME/.bridge
