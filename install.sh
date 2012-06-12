@@ -1,3 +1,4 @@
+
 #!/bin/sh
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
@@ -47,8 +48,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
 	GOT_RABBIT="1"
 	curl -L "${RABBIT_URL}${ARCH}.tar.gz" -o tmp/rabbitmq.tar.gz
 	tar -xzf tmp/rabbitmq.tar.gz
-	mv rabbitmq-server* rabbitmq
-	echo "moved rabbit files."
+	mv rabbitmq-server* "${TMP_DIR}/rabbitmq"
 	curl -L https://raw.github.com/getbridge/bridge-server/ec2/rabbitmq-server > $TMP_DIR/rabbitmq-server
 	echo "cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
 	chmod +x $TMP_DIR/rabbitmq-server
