@@ -47,7 +47,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
 	GOT_RABBIT="1"
 	curl -L "${RABBIT_URL}${ARCH}.tar.gz" -o tmp/rabbitmq.tar.gz
 	tar -xzf tmp/rabbitmq.tar.gz
-	mv rabbitmq-server* "${TMP_DIR}/rabbitmq";
+	mv rabbitmq-server-* "${TMP_DIR}/rabbitmq";
     else
 	err "Very well, then. I will respect your decision."
     fi
@@ -74,10 +74,10 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
 if [[ $GOT_RABBIT != "" ]]; then
-    curl -L https://raw.github.com/getbridge/bridge-server/ec2/rabbitmq-server > $TMP_DIR/rabbitmq-server
+    echo "#!/bin/sh" > $TMP_DIR/rabbitmq-server
     echo "cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
     chmod +x $TMP_DIR/rabbitmq-server
-    echo "  Execute \`./rabbitmq-server\`"
+    echo "  Execute \`${TMP_DIR}/rabbitmq-server\`"
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
