@@ -18,7 +18,7 @@ err() {
     exit 1
 }
 
-if [[ $ARCH =~ "^(x86|i.86)$" ]]; then
+if [[ -n "`uname -p | grep -P '^i.86$'`" ]]; then
     $ARCH = "x86"
 elif [ $ARCH != "x86_64" ]; then
     err "My sincerest apologies. I do not know how to deal with your computer's architecture."
