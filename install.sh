@@ -48,7 +48,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
 	curl -L "${RABBIT_URL}${ARCH}.tar.gz" -o tmp/rabbitmq.tar.gz
 	tar -xzf tmp/rabbitmq.tar.gz
 	mv rabbitmq-server* rabbitmq
-	curl -L https://raw.github.com/getbridge/bridge-server/ec2/rabbitmq-server -o > $TMP_DIR/rabbitmq-server
+	curl -L https://raw.github.com/getbridge/bridge-server/ec2/rabbitmq-server > $TMP_DIR/rabbitmq-server
 	echo "cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
 	chmod +x $TMP_DIR/rabbitmq-server
     else
