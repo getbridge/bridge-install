@@ -45,7 +45,7 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     if prompt "I can't seem to find rabbitmq-server in your path. Shall I fetch it for you?"; then
 	RABBIT_DIR="${TMP_DIR}/rabbitmq"
 	GOT_RABBIT="1"
-	wget -O tmp/rabbitmq.tar.gz "${RABBIT_URL}${ARCH}.tar.gz"
+	curl -L "${RABBIT_URL}${ARCH}.tar.gz" -o tmp/rabbitmq.tar.gz
 	
 	tar -xzf tmp/rabbitmq.tar.gz
 	mv rabbitmq-server* rabbitmq
@@ -59,7 +59,7 @@ if [ -d $TMP_DIR/bridge-server ]; then
 fi
 
 echo "Downloading and unpacking Bridge from ${BRIDGE_URL}/${ARCH}."
-wget -O tmp/bridge.tar.gz "${BRIDGE_URL}/${ARCH}"
+curl -L "${BRIDGE_URL}/${ARCH}" -o tmp/bridge.tar.gz
 
 tar -xzf tmp/bridge.tar.gz
 if [ $? != "0" ]; then
@@ -74,7 +74,8 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
-if [ -n $GOT_RABBIT ]; then
+if [[ $GOT_RABBIT != "" ]]; then
+    echo "got rabbit: '${GOT_RABBIT}'"
     echo "  Execute \`cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server\`".
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
