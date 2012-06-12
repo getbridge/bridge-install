@@ -79,7 +79,7 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
 if [ -n $GOT_RABBIT ]; then
-    echo "  Execute \`cd ${RABBIT_DIR}; ./sbin/rabbitmq-server\`".
+    echo "  Execute \`cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server\`".
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
