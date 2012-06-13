@@ -11,7 +11,7 @@ fi
 GOT_RABBIT=""
 
 TMP_DIR=$HOME/.bridge
-BIN_DIR=${TMP_DIR}/bridge-server/bc-latest/bin
+BIN_DIR=${TMP_DIR}/bridge-server/bin
 
 err() {
     echo "$@" 1>&2
