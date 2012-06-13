@@ -2,6 +2,7 @@
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
 RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server-2.8.1u."
+POST_INSTALL_URL="https://raw.github.com/gist/09ed552955d6deedd2be"
 
 GET_TO_IT=""
 if [ -z "${PS1}" ]; then
@@ -11,7 +12,7 @@ fi
 GOT_RABBIT=""
 
 TMP_DIR=$HOME/.bridge
-BIN_DIR=${TMP_DIR}/bridge-server/bin
+BIN_DIR=${TMP_DIR}/bridge-server/bc-latest/bin
 
 err() {
     echo "$@" 1>&2
@@ -71,17 +72,21 @@ rm -rf tmp
 
 echo "The installation is now complete. Have a good day, and do put in a good word, will you?"
 
+curl -L POST_INSTALL_URL -o setup.sh
+
+echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh`."
+
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
 if [[ $GOT_RABBIT != "" ]]; then
     echo "#!/bin/sh" > $TMP_DIR/rabbitmq-server
-    echo "cd ${RABBIT_DIR}; ./bin/start_epmd; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
+    echo "cd ~/.bridge/rabbitmq; ./bin/start_epmd; sleep 0.5; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
     chmod +x $TMP_DIR/rabbitmq-server
-    echo "  Execute \`${TMP_DIR}/rabbitmq-server\`"
+    echo "  Execute \`~/.bridge/rabbitmq-server\`"
 else
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
 
-echo -e "\n Then start the bridge server:\n  Execute \`${BIN_DIR}/server start\`"
+echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/bridge-server/bin/server start\`"
 
-echo -e "\n To stop the bridge server, simply run \`${BIN_DIR}/server stop\`"
+echo -e "\n To stop the bridge server, simply run \`~/.bridge/bridge-server/bin/server stop\`"
