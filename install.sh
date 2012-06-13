@@ -74,7 +74,7 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 
 curl -L $POST_INSTALL_URL -o setup.sh
 
-echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh`."
+echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh\`."
 
 echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
