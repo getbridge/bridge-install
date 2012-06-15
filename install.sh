@@ -73,9 +73,9 @@ mv getbridge-bridge-server-* bridge-server
 
 rm -rf tmp
 
-echo "The installation is now complete. Have a good day, and do put in a good word, will you?"
-
 curl -L $POST_INSTALL_URL -o setup.sh
+
+echo "The installation is now complete. Have a good day, and do put in a good word, will you?"
 
 echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh\`."
 
