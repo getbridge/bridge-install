@@ -48,7 +48,8 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
 	GOT_RABBIT="1"
 	curl -L "${RABBIT_URL}${ARCH}.tar.gz" -o tmp/rabbitmq.tar.gz
 	tar -xzf tmp/rabbitmq.tar.gz
-	mv rabbitmq-server-* "${TMP_DIR}/rabbitmq";
+	mv rabbitmq-server-* "$RABBIT_DIR";
+        sh $RABBIT_DIR/bin/post_install.sh
     else
 	err "Very well, then. I will respect your decision."
     fi
