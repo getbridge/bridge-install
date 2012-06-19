@@ -31,7 +31,7 @@ prompt() {
     fi
 
     read -r -p "$1 [Y/n] " response
-    response=`echo $response | tr [:upper:] [:lower:]`
+    response=`echo $response | tr '[:upper:]' '[:lower:]'`
     [[ $response =~ ^(y|yes)$ ]]
 }
 
