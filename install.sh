@@ -25,6 +25,10 @@ elif [ $ARCH != "x86_64" ]; then
     err "My sincerest apologies. I do not know how to deal with your computer's architecture."
 fi
 
+if [[ "`uname -s`" = "Darwin" ]]; then
+    ARCH="OSX"
+fi
+
 prompt() {
     if [ -n "${GET_TO_IT}" ]; then
 	return 0
