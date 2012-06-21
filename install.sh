@@ -95,7 +95,7 @@ else
 fi
 
 echo "#!/bin/sh" > $TMP_DIR/server
-echo "./bridge-server/bin/server \$1" >> $TMP_DIR/rabbitmq-server
+echo "$(cd ${0%/*} && pwd)/bridge-server/bin/server \$1" >> $TMP_DIR/rabbitmq-server
 chmod +x $TMP_DIR/server
 echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/bridge-server/bin/server start\`"
 
