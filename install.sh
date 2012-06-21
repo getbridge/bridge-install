@@ -87,7 +87,7 @@ echo -e "\n To use Bridge, first run the rabbitmq-server:"
 
 if [[ $GOT_RABBIT != "" ]]; then
     echo "#!/bin/sh" > $TMP_DIR/rabbitmq-server
-    echo "cd $(cd ${0%/*} && pwd)/rabbitmq; ./bin/start_epmd; sleep 0.5; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
+    echo "cd \$(cd \${0%/*} && pwd)/rabbitmq; ./bin/start_epmd; sleep 0.5; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
     chmod +x $TMP_DIR/rabbitmq-server
     echo "  Execute \`~/.bridge/rabbitmq-server\`"
 else
@@ -95,7 +95,7 @@ else
 fi
 
 echo "#!/bin/sh" > $TMP_DIR/server
-echo "$(cd ${0%/*} && pwd)/bridge-server/bin/server \$1" >> $TMP_DIR/server
+echo "\$(cd \${0%/*} && pwd)/bridge-server/bin/server \$1" >> $TMP_DIR/server
 chmod +x $TMP_DIR/server
 echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/bridge-server/bin/server start\`"
 
