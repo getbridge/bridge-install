@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-ARCH=`uname -p`
+ARCH=`uname -m`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
 RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server-2.8.1u."
 POST_INSTALL_URL="https://raw.github.com/gist/09ed552955d6deedd2be"
@@ -19,7 +19,7 @@ err() {
     exit 1
 }
 
-if [[ -n "`uname -p | grep -P '^i.86$'`" ]]; then
+if [[ -n "`uname -m | grep -P '^i.86$'`" ]]; then
     ARCH="x86"
 elif [ $ARCH != "x86_64" ]; then
     err "My sincerest apologies. I do not know how to deal with your computer's architecture."
