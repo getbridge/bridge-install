@@ -97,6 +97,6 @@ fi
 echo "#!/bin/sh" > $TMP_DIR/server
 echo "\$(cd \${0%/*} && pwd)/bridge-server/bin/server \$1" >> $TMP_DIR/server
 chmod +x $TMP_DIR/server
-echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/bridge-server/bin/server start\`"
+echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/server start\`"
 
-echo -e "\n To stop the bridge server, simply run \`~/.bridge/bridge-server/bin/server stop\`"
+echo -e "\n To stop the bridge server, simply run \`~/.bridge/server stop\`"
