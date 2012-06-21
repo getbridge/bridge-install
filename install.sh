@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 ARCH=`uname -p`
 BRIDGE_URL="https://github.com/getbridge/bridge-server/tarball"
 RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server-2.8.1u."
