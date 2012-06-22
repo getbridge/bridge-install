@@ -83,20 +83,18 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 
 echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh\`."
 
-echo -e "\n To use Bridge, first run the rabbitmq-server:"
+echo "#!/bin/sh" > $TMP_DIR/server
 
 if [[ $GOT_RABBIT != "" ]]; then
-    echo "#!/bin/sh" > $TMP_DIR/rabbitmq-server
-    echo "cd \$(cd \${0%/*} && pwd)/rabbitmq; ./bin/start_epmd; sleep 0.5; ./sbin/rabbitmq-server" >> $TMP_DIR/rabbitmq-server
-    chmod +x $TMP_DIR/rabbitmq-server
-    echo "  Execute \`~/.bridge/rabbitmq-server\`"
+    echo "cd \$(cd \${0%/*} && pwd)/rabbitmq; ./sbin/rabbitmq-server" >> $TMP_DIR/server
 else
+    echo -e "\n To use Bridge, first run the rabbitmq-server:"
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
 
-echo "#!/bin/sh" > $TMP_DIR/server
 echo "\$(cd \${0%/*} && pwd)/bridge-server/bin/server \$1" >> $TMP_DIR/server
 chmod +x $TMP_DIR/server
+
 echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/server start\`"
 
 echo -e "\n To stop the bridge server, simply run \`~/.bridge/server stop\`"
