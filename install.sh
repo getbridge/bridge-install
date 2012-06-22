@@ -5,6 +5,7 @@ RABBIT_URL="https://github.com/downloads/getbridge/bridge-server/rabbitmq-server
 POST_INSTALL_URL="https://raw.github.com/gist/09ed552955d6deedd2be"
 
 GET_TO_IT=""
+
 if [ -z "${PS1}" ]; then
     GET_TO_IT="1"
 fi
@@ -23,6 +24,10 @@ if [[ -n "`uname -m | grep -P '^i.86$'`" ]]; then
     ARCH="x86"
 elif [ $ARCH != "x86_64" ]; then
     err "My sincerest apologies. I do not know how to deal with your computer's architecture."
+fi
+
+if [ -f "/etc/debian_version" ]; then
+    ARCH="deb-${ARCH}"
 fi
 
 if [[ "`uname -s`" = "Darwin" ]]; then
