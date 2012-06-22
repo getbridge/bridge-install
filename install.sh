@@ -26,10 +26,6 @@ elif [ $ARCH != "x86_64" ]; then
     err "My sincerest apologies. I do not know how to deal with your computer's architecture."
 fi
 
-if [ -f "/etc/debian_version" ]; then
-    ARCH="deb-${ARCH}"
-fi
-
 if [[ "`uname -s`" = "Darwin" ]]; then
     ARCH="OSX"
 fi
@@ -64,6 +60,10 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     else
 	err "Very well, then. I will respect your decision."
     fi
+fi
+
+if [ -f "/etc/debian_version" ]; then
+    ARCH="deb-${ARCH}"
 fi
 
 if [ -d $TMP_DIR/bridge-server ]; then
