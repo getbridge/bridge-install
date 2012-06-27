@@ -89,15 +89,20 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh\`."
 
 echo "#!/bin/sh" > $TMP_DIR/server
+echo "PAR=\$(dirname \$(readlink -f \$0))" >> $TMP_DIR/server
+echo "OLD_LD_LIBRARY_PATH=\$LD_LIBRARY_PATH" >> $TMP_DIR/server
 
 if [[ $GOT_RABBIT != "" ]]; then
-    echo "cd \$(cd \${0%/*} && pwd)/rabbitmq; ./sbin/rabbitmq-server" >> $TMP_DIR/server
+    echo "cd \$PAR/rabbitmq; ./sbin/rabbitmq-server" >> $TMP_DIR/server
 else
     echo -e "\n To use Bridge, first run the rabbitmq-server:"
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
 fi
+echo "export LD_LIBRARY_PATH=\$PAR/bridge-server/local/lib\${LD_LIBRARY_PATH:+:}\$LD_LIBRARY_PATH" >> $TMP_DIR/server
+echo "\$PAR/bridge-server/bin/server \$1" >> $TMP_DIR/server
 
-echo "\$(cd \${0%/*} && pwd)/bridge-server/bin/server \$1" >> $TMP_DIR/server
+echo "export LD_LIBRARY_PATH=\$OLD_LD_LIBRARY_PATH" >> $TMP_DIR/server
+
 chmod +x $TMP_DIR/server
 
 echo -e "\n Then start the bridge server:\n  Execute \`~/.bridge/server start\`"
