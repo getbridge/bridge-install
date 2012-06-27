@@ -62,10 +62,6 @@ if [ -z "`which rabbitmq-server 2>&1 | grep -P '^/'`" ]; then
     fi
 fi
 
-if [ -f "/etc/debian_version" ]; then
-    ARCH="deb-${ARCH}"
-fi
-
 if [ -d $TMP_DIR/bridge-server ]; then
     mv $TMP_DIR/bridge-server $TMP_DIR/bridge-server.old`date +%m%d%H%M%Y.%S`
 fi
