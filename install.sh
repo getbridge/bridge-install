@@ -85,7 +85,7 @@ echo "The installation is now complete. Have a good day, and do put in a good wo
 echo -e "\n Run the post-install script via \`sh ~/.bridge/setup.sh\`."
 
 echo "#!/bin/sh" > $TMP_DIR/server
-echo "PAR=\$(dirname \$(readlink -f \$0))" >> $TMP_DIR/server
+echo "PAR=\$(cd \${0%/*} && pwd)" >> $TMP_DIR/server
 echo "OLD_LD_LIBRARY_PATH=\$LD_LIBRARY_PATH" >> $TMP_DIR/server
 
 if [[ $GOT_RABBIT != "" ]]; then
