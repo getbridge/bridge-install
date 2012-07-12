@@ -89,7 +89,8 @@ echo "PAR=\$(cd \${0%/*} && pwd)" >> $TMP_DIR/server
 echo "OLD_LD_LIBRARY_PATH=\$LD_LIBRARY_PATH" >> $TMP_DIR/server
 
 if [[ $GOT_RABBIT != "" ]]; then
-    echo "cd \$PAR/rabbitmq; ./sbin/rabbitmq-server" >> $TMP_DIR/server
+    echo "if [ '\$1' = 'stop' ]; then $PAR/rabbitmq/bin/stop_server; else" >> $TMP_DIR/server
+    echo "cd \$PAR/rabbitmq; ./sbin/rabbitmq-server; fi" >> $TMP_DIR/server
 else
     echo -e "\n To use Bridge, first run the rabbitmq-server:"
     echo "  Execute \`rabbitmq-server\` (if you want, run it with the -detached flag)."
